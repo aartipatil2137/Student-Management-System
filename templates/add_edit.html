@@ -1,0 +1,67 @@
+
+{% extends "base.html" %}
+
+{% block title %}{{ mode }} Student | Student Manager{% endblock %}
+
+{% block content %}
+<section class="form-heading">
+    <p class="eyebrow">STUDENT RECORD</p>
+    <h1>{{ mode }} Student</h1>
+    <p class="muted">
+        Enter student details. Fields marked * are required.
+    </p>
+</section>
+
+<section class="form-card">
+    <form method="post" id="student-form">
+        <div class="form-grid">
+            <div class="field full">
+                <label for="name">Full name *</label>
+                <input id="name" name="name" required maxlength="100"
+                       value="{{ student.name if student else '' }}"
+                       placeholder="Enter student name">
+            </div>
+
+            <div class="field">
+                <label for="email">Email *</label>
+                <input id="email" name="email" type="email"
+                       required maxlength="120"
+                       value="{{ student.email if student else '' }}"
+                       placeholder="student@example.com">
+            </div>
+
+            <div class="field">
+                <label for="phone">Phone</label>
+                <input id="phone" name="phone" maxlength="20"
+                       value="{{ student.phone if student else '' }}"
+                       placeholder="Phone number">
+            </div>
+
+            <div class="field">
+                <label for="course">Course *</label>
+                <input id="course" name="course" required maxlength="100"
+                       value="{{ student.course if student else '' }}"
+                       placeholder="e.g. Python">
+            </div>
+
+            <div class="field">
+                <label for="marks">Marks (0–100) *</label>
+                <input id="marks" name="marks" type="number"
+                       min="0" max="100" step="0.01" required
+                       value="{{ student.marks if student else '' }}"
+                       placeholder="e.g. 85.5">
+            </div>
+        </div>
+
+        <p id="form-error" class="form-error" aria-live="polite"></p>
+
+        <div class="form-actions">
+            <button class="button" type="submit">
+                {{ mode }} student
+            </button>
+            <a class="button secondary"
+               href="{{ url_for('index') }}">Cancel</a>
+        </div>
+    </form>
+</section>
+{% endblock %}
